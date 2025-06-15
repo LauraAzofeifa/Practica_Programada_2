@@ -1,0 +1,78 @@
+﻿@model List<ProgramacionAvanzada.Web.Models.Car>
+
+@{
+    ViewBag.Title = "Lista de Vehiculos";
+}
+
+<h2>Lista de Vehiculos</h2>
+
+<table class="table">
+
+    <!-- Encabezado de la tabla -->
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+
+    <!-- ForEach para enlistar los vehiculos -->
+    @foreach (var car in Model)
+    {
+        <!-- Convertimos el ID a tipo INT -->
+        var idNum = int.Parse(car.Id);
+
+        <!-- Se coloca condicional para asignar un CSS si es impar o par -->
+        string clase = idNum % 2 == 0 ? "par" : "impar";
+
+        <!-- Tabla que enlista los vehiculos -->
+        <tr class="@clase">
+
+            <!-- Id del vehiculo -->
+            <td>@car.Id</td>
+
+            <!-- Marca del vehiculo -->
+            <td>@car.brand</td>
+            <td>
+
+                <!-- Descripcion del vehiculo -->
+                @car.Description
+
+                <!-- Codicional para aplicar estilo al registro -->
+                @if (idNum % 2 != 0)
+                {
+                    <strong> - ID Impar</strong>
+                }
+            </td>
+
+            <!-- Fecha de creación del registro del vehiculo -->
+            <td>@car.DateCreated.ToShortDateString()</td>
+            <td>
+
+                <!-- Metodo Post Razor para eliminar Vehiculo-->
+                @using (Html.BeginForm("Delete", "Car", new { id = car.Id }, FormMethod.Post))
+                {
+                    <!-- Boton eliminar vehiculos -->
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Boton de Agregar nuevo vehiculo -->
+<a href="@Url.Action("Create", "Car")" class="btn btn-primary">Agregar Vehiculo</a>
+
+<!-- Estilos de color para las lineas de ID impar o Par -->
+
+<style>
+    .par {
+        background-color: mintcream;
+    }
+
+    .impar {
+        background-color: papayawhip;
+    }
+</style>
+
