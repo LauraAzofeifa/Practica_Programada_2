@@ -1,0 +1,22 @@
+﻿@model ProgramacionAvanzada.Web.Models.Person
+
+@{
+    ViewBag.Title = "Crear Persona";
+}
+
+<h2>Crear Persona</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+}

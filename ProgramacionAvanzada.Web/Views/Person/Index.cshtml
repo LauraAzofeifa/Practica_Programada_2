@@ -1,0 +1,54 @@
+﻿@model List<ProgramacionAvanzada.Web.Models.Person>
+
+@{
+    ViewBag.Title = "Lista de Personas";
+}
+
+<h2>Lista de Personas</h2>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var person in Model)
+    {
+        var idNum = int.Parse(person.Id);
+        string clase = idNum % 2 == 0 ? "par" : "impar";
+
+        <tr class="@clase">
+            <td>@person.Id</td>
+            <td>@person.Name</td>
+            <td>
+                @person.Description
+                @if (idNum % 2 != 0)
+                {
+                    <strong> - ID Impar</strong>
+                }
+            </td>
+            <td>@person.DateCreated.ToShortDateString()</td>
+            <td>
+                @using (Html.BeginForm("Delete", "Person", new { id = person.Id }, FormMethod.Post))
+                {
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="@Url.Action("Create", "Person")" class="btn btn-primary">Agregar Persona</a>
+
+<style>
+    .par {
+        background-color: aliceblue;
+    }
+
+    .impar {
+        background-color: aqua;
+    }
+</style>
