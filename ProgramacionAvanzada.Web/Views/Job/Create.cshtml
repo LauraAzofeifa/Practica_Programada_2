@@ -1,0 +1,24 @@
+@model ProgramacionAvanzada.Web.Models.Job
+
+@{
+    ViewBag.Title = "Registrar nuevo Trabajo";
+}
+
+<h2>Registrar nuevo Trabajo</h2>
+
+<!-- Formulario de registro -->
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <!-- Boton de Guardar registro-->
+    <button type="submit" class="btn btn-success">Guardar</button>
+}
